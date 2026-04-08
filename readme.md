@@ -15,6 +15,9 @@ Organizar e documentar minha evolução na construção de aplicações, consoli
 
 * **`Atividade2/`**: *Atividade de revisão de POO no Windows Forms, praticando os conceitos de Polimorfismo, Encapsulamento e herança*
 * **`Atividade3/`**: *exercícios básicos de Javascript, focando em revisar conceitos e diferenças que o javascript possui*
+* **`Atividade4/`**: *criando um jogo em javascript, praticando javascript na prática*
+
+
 
 ## 🚀 Como executar os projetos
 
