@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Pedra, Papel ou Tesoura</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            padding: 30px;
+            text-align: center;
+        }
+
+        button {
+            padding: 12px 20px;
+            margin: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        #resultado {
+            margin-top: 25px;
+            padding: 20px;
+            background: #fff;
+            display: inline-block;
+            border-radius: 10px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Pedra, Papel ou Tesoura</h1>
+    <p>Escolha sua jogada:</p>
+
+    <button onclick="jogar('pedra')">Pedra</button>
+    <button onclick="jogar('papel')">Papel</button>
+    <button onclick="jogar('tesoura')">Tesoura</button>
+
+    <div id="resultado"></div>
+
+    <script>
+        function jogar(usuario) {
+            const opcoes = ["pedra", "papel", "tesoura"];
+            
+            // Computador gera um número aleatório entre 0 e 2
+            const computador = opcoes[Math.floor(Math.random() * 3)];
+
+            let vencedor = "";
+
+            if (usuario === computador) {
+                vencedor = "Empate!";
+            } else if (
+                (usuario === "pedra" && computador === "tesoura") ||
+                (usuario === "tesoura" && computador === "papel") ||
+                (usuario === "papel" && computador === "pedra")
+            ) {
+                vencedor = "Você venceu!";
+            } else {
+                vencedor = "Computador venceu!";
+            }
+
+            document.getElementById("resultado").innerHTML =
+                `<strong>Sua escolha:</strong> ${usuario}<br>
+                 <strong>Computador:</strong> ${computador}<br><br>
+                 <strong>${vencedor}</strong>`;
+        }
+    </script>
+
+</body>
+</html>
