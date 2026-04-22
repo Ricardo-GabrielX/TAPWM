@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinema Analytics</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: "Plus Jakarta Sans", sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            margin: 0;
+            padding: 40px 16px;
+        }
+
+        main {
+            max-width: 700px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        header {
+            text-align: center;
+        }
+
+        .title {
+            font-size: 26px;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        form {
+            display: grid;
+            gap: 16px;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        label {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #64748b;
+        }
+
+        .input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            background: #f9fafb;
+        }
+
+        .input:focus {
+            outline: none;
+            border-color: #94a3b8;
+        }
+
+        .btn {
+            background: #1e293b;
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .muted {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .value {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .highlight {
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .gender-box {
+            display: flex;
+            gap: 10px;
+        }
+
+        .mini {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px;
+            background: #f1f5f9;
+        }
+    </style>
+</head>
+
+<body>
+
+<main>
+
+    <header>
+        <div class="title">Pesquisa de Público</div>
+        <div class="subtitle">Coleta de dados e análise de avaliações</div>
+    </header>
+
+    <!-- FORM -->
+    <section class="card">
+        <form id="form-pesquisa">
+
+            <div class="highlight-box">
+                <strong>Nova Avaliação</strong>
+                <span id="progresso" class="muted">0 / 45</span>
+            </div>
+
+            <div class="row">
+                <div>
+                    <label>Idade</label>
+                    <input type="number" id="input-idade" class="input" required min="1" max="120">
+                </div>
+
+                <div>
+                    <label>Gênero</label>
+                    <select id="input-genero" class="input" required>
+                        <option value="">Escolha...</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="feminino">Feminino</option>
+                        <option value="outros">Outros</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label>Avaliação</label>
+                <select id="input-opiniao" class="input" required>
+                    <option value="">Selecione</option>
+                    <option value="4">Ótimo</option>
+                    <option value="3">Bom</option>
+                    <option value="2">Regular</option>
+                    <option value="1">Péssimo</option>
+                </select>
+            </div>
+
+            <button type="submit" id="btn-enviar" class="btn">
+                Registrar
+            </button>
+
+        </form>
+    </section>
+
+    <!-- RESULTADOS -->
+    <section class="grid">
+        <div class="card">
+            <div class="muted">Média Idade</div>
+            <div id="res-media" class="value">-</div>
+        </div>
+
+        <div class="card">
+            <div class="muted">Mais Velho</div>
+            <div id="res-velho" class="value">-</div>
+        </div>
+
+        <div class="card">
+            <div class="muted">Mais Novo</div>
+            <div id="res-novo" class="value">-</div>
+        </div>
+
+        <div class="card">
+            <div class="muted">Péssimos</div>
+            <div id="res-pessimo" class="value">-</div>
+        </div>
+    </section>
+
+    <!-- APROVAÇÃO -->
+    <section class="card">
+
+        <div class="highlight-box">
+            <div>
+                <div class="muted">Aprovação</div>
+                <div id="res-aprovacao" class="highlight">-%</div>
+            </div>
+
+            <div class="gender-box">
+                <div class="mini">
+                    <div class="muted">Homens</div>
+                    <div id="count-h">0</div>
+                </div>
+
+                <div class="mini">
+                    <div class="muted">Mulheres</div>
+                    <div id="count-m">0</div>
+                </div>
+
+                <div class="mini">
+                    <div class="muted">Outros</div>
+                    <div id="count-o">0</div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</main>
+
+<script src="script.js"></script>
+
+</body>
+</html>
