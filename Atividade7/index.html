@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Atividade 7 — JavaScript Funções</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header>
+  <h1>Atividade 7 — Funções JavaScript</h1>
+  <p>Cinco funções com arquivo externo (funcoes.js)</p>
+</header>
+
+<div class="grid">
+
+  <!-- Função 1 -->
+  <div class="card">
+    <div class="card-num">Função 01</div>
+    <h2>Maior de três números</h2>
+    <div class="field-row">
+      <div>
+        <label>A</label>
+        <input type="number" id="f1a" placeholder="Ex: 10" />
+      </div>
+      <div>
+        <label>B</label>
+        <input type="number" id="f1b" placeholder="Ex: 25" />
+      </div>
+      <div>
+        <label>C</label>
+        <input type="number" id="f1c" placeholder="Ex: 7" />
+      </div>
+    </div>
+    <button onclick="executarF1()">Executar</button>
+    <div class="result" id="r1">
+      <span>Maior número:</span>
+      <strong id="r1v"></strong>
+    </div>
+  </div>
+
+  <!-- Função 2 -->
+  <div class="card">
+    <div class="card-num">Função 02</div>
+    <h2>Ordenar três números em ordem crescente</h2>
+    <div class="field-row">
+      <div>
+        <label>A</label>
+        <input type="number" id="f2a" placeholder="Ex: 30" />
+      </div>
+      <div>
+        <label>B</label>
+        <input type="number" id="f2b" placeholder="Ex: 5" />
+      </div>
+      <div>
+        <label>C</label>
+        <input type="number" id="f2c" placeholder="Ex: 17" />
+      </div>
+    </div>
+    <button onclick="executarF2()">Executar</button>
+    <div class="result" id="r2">
+      <span>Ordem crescente:</span>
+      <strong id="r2v"></strong>
+    </div>
+  </div>
+
+  <!-- Função 3 -->
+  <div class="card">
+    <div class="card-num">Função 03</div>
+    <h2>Verificar palíndromo</h2>
+    <div class="field-group">
+      <div>
+        <label>Palavra ou frase</label>
+        <input type="text" id="f3s" placeholder="Ex: arara, radar, ovo..." />
+      </div>
+    </div>
+    <button onclick="executarF3()">Executar</button>
+    <div class="result" id="r3">
+      <span>Resultado:</span>
+      <strong id="r3v"></strong>
+    </div>
+  </div>
+
+  <!-- Função 4 -->
+  <div class="card">
+    <div class="card-num">Função 04</div>
+    <h2>Verificar se é subconjunto</h2>
+    <div class="field-group">
+      <div>
+        <label>Palavra 1 (principal)</label>
+        <input type="text" id="f4a" placeholder="Ex: programação" />
+      </div>
+      <div>
+        <label>Palavra 2 (possível subconjunto)</label>
+        <input type="text" id="f4b" placeholder="Ex: programa" />
+      </div>
+    </div>
+    <button onclick="executarF4()">Executar</button>
+    <div class="result" id="r4">
+      <span>Resultado:</span>
+      <strong id="r4v"></strong>
+    </div>
+  </div>
+
+  <!-- Função 5 -->
+  <div class="card">
+    <div class="card-num">Função 05</div>
+    <h2>Dia da semana a partir de uma data</h2>
+    <div class="field-group">
+      <div>
+        <label>Data</label>
+        <input type="date" id="f5d" />
+      </div>
+    </div>
+    <button onclick="executarF5()">Executar</button>
+    <div class="result" id="r5">
+      <span>Dia da semana:</span>
+      <strong id="r5v"></strong>
+    </div>
+  </div>
+
+</div>
+
+<script src="funcoes.js"></script>
+<script>
+  function mostrar(id, valor) {
+    const box = document.getElementById(id);
+    const val = document.getElementById(id + 'v');
+    val.textContent = valor;
+    box.classList.add('show');
+  }
+
+  function executarF1() {
+    const a = parseFloat(document.getElementById('f1a').value);
+    const b = parseFloat(document.getElementById('f1b').value);
+    const c = parseFloat(document.getElementById('f1c').value);
+    if (isNaN(a) || isNaN(b) || isNaN(c)) return mostrar('r1', 'Informe três números válidos.');
+    mostrar('r1', maiorDetres(a, b, c));
+  }
+
+  function executarF2() {
+    const a = parseFloat(document.getElementById('f2a').value);
+    const b = parseFloat(document.getElementById('f2b').value);
+    const c = parseFloat(document.getElementById('f2c').value);
+    if (isNaN(a) || isNaN(b) || isNaN(c)) return mostrar('r2', 'Informe três números válidos.');
+    mostrar('r2', ordenarCrescente(a, b, c).join(' < '));
+  }
+
+  function executarF3() {
+    const s = document.getElementById('f3s').value.trim();
+    if (!s) return mostrar('r3', 'Informe uma palavra ou frase.');
+    mostrar('r3', ehPalindromo(s) ? `"${s}" É um palíndromo` : `"${s}" NÃO é um palíndromo`);
+  }
+
+  function executarF4() {
+    const a = document.getElementById('f4a').value.trim();
+    const b = document.getElementById('f4b').value.trim();
+    const res = verificarSubconjunto(a, b);
+    if (res === 'erro') return mostrar('r4', 'Erro: uma ou ambas as palavras estão vazias.');
+    mostrar('r4', `"${b}" ${res} de "${a}"`);
+  }
+
+  function executarF5() {
+    const d = document.getElementById('f5d').value;
+    if (!d) return mostrar('r5', 'Selecione uma data.');
+    mostrar('r5', diaDaSemana(d));
+  }
+</script>
+
+</body>
+</html>

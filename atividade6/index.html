@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verificador de Triângulo</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f3ee;
+      --surface: #ffffff;
+      --border: #e2dfd8;
+      --text: #1a1916;
+      --muted: #7a7770;
+      --accent: #2d6a4f;
+      --accent-light: #e8f5ef;
+      --warn: #b45309;
+      --warn-light: #fef3c7;
+      --info: #1d4ed8;
+      --info-light: #eff6ff;
+      --danger: #b91c1c;
+      --danger-light: #fef2f2;
+      --radius: 12px;
+      --mono: 'DM Mono', monospace;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 460px;
+      box-shadow: 0 2px 32px rgba(0,0,0,0.06);
+    }
+
+    .header {
+      margin-bottom: 2rem;
+    }
+
+    .tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 4px 10px;
+      border-radius: 100px;
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 0.4rem;
+    }
+
+    .subtitle {
+      font-size: 0.875rem;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    .inputs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 1.5rem;
+    }
+
+    .field label {
+      display: block;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      font-family: var(--mono);
+      font-size: 1rem;
+      color: var(--text);
+      background: var(--bg);
+      transition: border-color 0.2s, background 0.2s;
+      outline: none;
+      text-align: center;
+    }
+
+    .field input:focus {
+      border-color: var(--accent);
+      background: var(--surface);
+    }
+
+    .field input::placeholder {
+      color: #ccc;
+    }
+
+    .result {
+      min-height: 80px;
+      margin-bottom: 1.5rem;
+    }
+
+    .result-box {
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      animation: fadeIn 0.25s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .result-box.success { background: var(--accent-light); border: 1px solid #a7d9bc; }
+    .result-box.info    { background: var(--info-light);   border: 1px solid #bfdbfe; }
+    .result-box.warn    { background: var(--warn-light);   border: 1px solid #fde68a; }
+    .result-box.danger  { background: var(--danger-light); border: 1px solid #fecaca; }
+
+    .result-icon {
+      font-size: 1.4rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .result-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .result-box.success .result-title { color: var(--accent); }
+    .result-box.info    .result-title { color: var(--info);   }
+    .result-box.warn    .result-title { color: var(--warn);   }
+    .result-box.danger  .result-title { color: var(--danger); }
+
+    .result-desc {
+      font-size: 0.82rem;
+      opacity: 0.8;
+    }
+
+    .result-box.success .result-desc { color: var(--accent); }
+    .result-box.info    .result-desc { color: var(--info);   }
+    .result-box.warn    .result-desc { color: var(--warn);   }
+    .result-box.danger  .result-desc { color: var(--danger); }
+
+    .rules {
+      border-top: 1px solid var(--border);
+      padding-top: 1.25rem;
+    }
+
+    .rules-title {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .rules-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .rule {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--muted);
+      background: var(--bg);
+      padding: 5px 10px;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <div class="header">
+    <span class="tag">JavaScript — Atividade 6</span>
+    <h1>Verificando tipo de triângulo</h1>
+    <p class="subtitle">Informe os três lados para verificar se formam um triângulo e qual o tipo.</p>
+  </div>
+
+  <div class="inputs">
+    <div class="field">
+      <label>Lado A</label>
+      <input type="number" id="a" placeholder="0" oninput="verificar()" />
+    </div>
+    <div class="field">
+      <label>Lado B</label>
+      <input type="number" id="b" placeholder="0" oninput="verificar()" />
+    </div>
+    <div class="field">
+      <label>Lado C</label>
+      <input type="number" id="c" placeholder="0" oninput="verificar()" />
+    </div>
+  </div>
+
+  <div class="result" id="resultado"></div>
+
+  <div class="rules">
+    <p class="rules-title">Regra de existência</p>
+    <div class="rules-list">
+      <span class="rule">|b − c| &lt; a &lt; b + c</span>
+      <span class="rule">|a − c| &lt; b &lt; a + c</span>
+      <span class="rule">|a − b| &lt; c &lt; a + b</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  function verificar() {
+    const va = document.getElementById('a').value.trim();
+    const vb = document.getElementById('b').value.trim();
+    const vc = document.getElementById('c').value.trim();
+    const el = document.getElementById('resultado');
+
+    if (va === '' || vb === '' || vc === '') {
+      el.innerHTML = '';
+      return;
+    }
+
+    if (isNaN(va) || isNaN(vb) || isNaN(vc)) {
+      el.innerHTML = box('danger', '✕', 'Valores inválidos', 'Os três campos devem conter números.');
+      return;
+    }
+
+    const a = parseFloat(va), b = parseFloat(vb), c = parseFloat(vc);
+
+    if (a <= 0 || b <= 0 || c <= 0) {
+      el.innerHTML = box('danger', '✕', 'Valores inválidos', 'Os lados devem ser maiores que zero.');
+      return;
+    }
+
+    const eTriangulo =
+      Math.abs(b - c) < a && a < b + c &&
+      Math.abs(a - c) < b && b < a + c &&
+      Math.abs(a - b) < c && c < a + b;
+
+    if (!eTriangulo) {
+      el.innerHTML = box('danger', '△', 'Não forma triângulo', 'Os valores não satisfazem a condição de existência.');
+      return;
+    }
+
+    if (a === b && b === c) {
+      el.innerHTML = box('success', '△', 'Triângulo Equilátero', 'Os três lados são iguais: a = b = c.');
+    } else if (a === b || b === c || a === c) {
+      el.innerHTML = box('info', '△', 'Triângulo Isósceles', 'Dois lados são iguais entre si.');
+    } else {
+      el.innerHTML = box('warn', '△', 'Triângulo Escaleno', 'Os três lados possuem medidas diferentes.');
+    }
+  }
+
+  function box(tipo, icone, titulo, descricao) {
+    return `
+      <div class="result-box ${tipo}">
+        <span class="result-icon">${icone}</span>
+        <div>
+          <p class="result-title">${titulo}</p>
+          <p class="result-desc">${descricao}</p>
+        </div>
+      </div>`;
+  }
+</script>
+
+</body>
+</html>
