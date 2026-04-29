@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 8</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background-color: #f0f2f5; }
+        .card { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        input { padding: 8px; margin: 5px; width: 60px; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 8px 15px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #218838; }
+        ul { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); }
+        li { background: #e9ecef; margin: 3px; padding: 5px; border-radius: 3px; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>Exercício 1: Soma e Quadrados</h2>
+        <input type="number" id="n1" value="0">
+        <input type="number" id="n2" value="0">
+        <input type="number" id="n3" value="0">
+        <button onclick="calcular()">Calcular</button>
+        <p id="output1"></p>
+    </div>
+
+    <div class="card">
+        <h2>Exercício 2: Gerar 10 Palavras</h2>
+        <p>Insira 5 letras:</p>
+        <input type="text" id="l1" maxlength="1" value="A">
+        <input type="text" id="l2" maxlength="1" value="B">
+        <input type="text" id="l3" maxlength="1" value="C">
+        <input type="text" id="l4" maxlength="1" value="D">
+        <input type="text" id="l5" maxlength="1" value="E">
+        <button onclick="gerar()">Gerar Palavras</button>
+        <div id="output2"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
