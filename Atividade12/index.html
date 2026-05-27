@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Janela Interativa</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background-color: #d0e8f5;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 24px;
+      color: #1a3a4a;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+    }
+
+    #janela-img {
+      width: 420px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    #janela-img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+    }
+
+    #dica {
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: #446;
+      opacity: 0.8;
+    }
+
+    #credito {
+      margin-top: 10px;
+      font-size: 0.72rem;
+      color: #557;
+    }
+
+    #credito a { color: #2277aa; }
+  </style>
+</head>
+<body>
+
+  <h1 id="titulo">Janela Fechada</h1>
+
+  <img
+    id="janela-img"
+    src="https://images.pexels.com/photos/26987346/pexels-photo-26987346.jpeg"
+    alt="Janela"
+  >
+
+  <p id="dica">Passe o mouse para abrir • Clique para quebrar</p>
+  <p id="credito">Fotos por <a href="https://www.pexels.com" target="_blank">Pexels</a></p>
+
+  <script>
+    const img    = document.getElementById("janela-img");
+    const titulo = document.getElementById("titulo");
+
+    const imagens = {
+      fechada:  "https://images.pexels.com/photos/26987346/pexels-photo-26987346.jpeg",
+      aberta:   "https://images.pexels.com/photos/33332288/pexels-photo-33332288.jpeg?auto=compress&cs=tinysrgb&w=600",
+      quebrada: "https://images.pexels.com/photos/30718276/pexels-photo-30718276.jpeg?auto=compress&cs=tinysrgb&w=600"
+    };
+
+    let quebrada = false;
+
+    img.addEventListener("mouseover", function () {
+      if (!quebrada) {
+        img.src = imagens.aberta;
+        titulo.textContent = "Janela Aberta";
+      }
+    });
+
+    img.addEventListener("mouseout", function () {
+      if (!quebrada) {
+        img.src = imagens.fechada;
+        titulo.textContent = "Janela Fechada";
+      }
+    });
+
+    img.addEventListener("click", function () {
+      quebrada = true;
+      img.src = imagens.quebrada;
+      titulo.textContent = "Janela Quebrada";
+    });
+  </script>
+
+</body>
+</html>
