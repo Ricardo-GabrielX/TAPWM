@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Teste eventos 4</title>
+    <script>
+        function qualTecla() {
+            let tecla = String.fromCharCode(event.key);
+            alert("Você clicou " + tecla);
+        }
+    </script>
+</head>
+
+<body>
+    <img src="minhafoto.jpg" onerror="alert('Epa cadê a foto???');" />
+    Nome : <input type="text" onkeypress="qualTecla();">
+</body>
+
+</html>
