@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercício 2 - Cursos Fatec Sorocaba</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 50px;
+            text-align: center;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: inline-block;
+        }
+        select {
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Cursos da Fatec Sorocaba</h2>
+    <p>Selecione um curso para mais informações:</p>
+    
+    <select id="cursos" onchange="abrirCurso(this)">
+        <option value="">-- Escolha um curso --</option>
+        <option value="ads">Análise e Desenvolvimento de Sistemas</option>
+        <option value="biomedicos">Sistemas Biomédicos</option>
+        <option value="fabricacao">Fabricação Mecânica</option>
+        <option value="logistica">Logística</option>
+        <option value="polimeros">Polímeros</option>
+    </select>
+</div>
+
+<script>
+    function abrirCurso(selectElement) {
+        const cursoId = selectElement.value;
+        const cursoNome = selectElement.options[selectElement.selectedIndex].text;
+
+        if (cursoId === "") {
+            return;
+        }
+
+        const confirmacao = confirm(`Deseja realmente abrir a janela com informações sobre o curso de ${cursoNome}?`);
+
+        if (confirmacao) {
+            const novaJanela = window.open("", "_blank", "width=600,height=300");
+            
+            let infoCurso = "";
+            switch (cursoId) {
+                case "ads":
+                    infoCurso = "Forma profissionais capazes de projetar, documentar, testar, implementar e manter sistemas computacionais e de informação.";
+                    break;
+                case "biomedicos":
+                    infoCurso = "O profissional atua na área de saúde e tecnologia, projetando e realizando manutenção em equipamentos médico-hospitalares.";
+                    break;
+                case "fabricacao":
+                    infoCurso = "Foca no planejamento e controle dos processos de fabricação mecânica, usinagem e desenvolvimento de produtos industriais.";
+                    break;
+                case "logistica":
+                    infoCurso = "Prepara o aluno para gerenciar cadeias de suprimentos, redes de distribuição e processos de transporte e armazenamento.";
+                    break;
+                case "polimeros":
+                    infoCurso = "Especializa o profissional na transformação de plásticos e borrachas, controle de qualidade e desenvolvimento de novos materiais poliméricos.";
+                    break;
+            }
+
+            novaJanela.document.write(`
+                <!DOCTYPE html>
+                <html lang="pt-BR">
+                <head>
+                    <meta charset="UTF-8">
+                    <title>${cursoNome}</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; padding: 20px; background-color: #e9ecef; }
+                        h2 { color: #005a88; }
+                        p { font-size: 1.1em; line-height: 1.5; }
+                    </style>
+                </head>
+                <body>
+                    <h2>${cursoNome}</h2>
+                    <hr>
+                    <p>${infoCurso}</p>
+                </body>
+                </html>
+            `);
+            
+            novaJanela.document.close();
+        }
+
+        selectElement.selectedIndex = 0;
+    }
+</script>
+
+</body>
+</html>
