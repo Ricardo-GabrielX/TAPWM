@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Atividade 14 - Formulário Principal</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background-color: #009dda; 
+            color: white; 
+            display: flex; 
+            justify-content: center; 
+            padding-top: 50px; 
+        }
+        .container { 
+            background-color: #0088c2; 
+            padding: 30px; 
+            width: 450px; 
+            border: 1px solid #005a88; 
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+        }
+        h2 { text-align: center; font-weight: normal; margin-top: 0; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-size: 0.9em; }
+        input[type="text"], input[type="email"], textarea { 
+            width: 100%; 
+            padding: 6px; 
+            box-sizing: border-box; 
+        }
+        textarea { height: 80px; resize: none; }
+        .radio-group { text-align: center; margin-top: 30px; }
+        .radio-group p { margin: 5px 0; }
+        .radio-group .subtitle { font-size: 0.8em; font-style: italic; margin-bottom: 15px;}
+        .radio-group label { display: inline; margin: 0 15px 0 2px; }
+        .buttons { text-align: center; margin-top: 25px; }
+        .buttons input { padding: 5px 15px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Formulário Principal</h2>
+    
+    <form name="meuFormulario" onsubmit="return validar()">
+        
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome">
+        </div>
+
+        <div class="form-group">
+            <label for="email">E-mail:</label>
+            <!-- Email (type=Email) conforme exigido -->
+            <input type="email" id="email" name="email">
+        </div>
+
+        <div class="form-group">
+            <label for="comentario">Comentário:</label>
+            <textarea id="comentario" name="comentario"></textarea>
+        </div>
+
+        <div class="radio-group">
+            <p>Pesquisa:</p>
+            <p class="subtitle">Primeira vez nesta página??</p>
+            
+            
+            <input type="radio" id="sim" name="pesquisa" value="sim">
+            <label for="sim">Sim</label>
+            
+            <input type="radio" id="nao" name="pesquisa" value="nao">
+            <label for="nao">Não</label>
+        </div>
+
+        <div class="buttons">
+            <input type="submit" value="Enviar">
+            <input type="reset" value="Limpar">
+        </div>
+        
+    </form>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
