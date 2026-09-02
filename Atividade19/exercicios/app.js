@@ -1,28 +1,20 @@
-let express = require('express');
-let app = express();
+let app = require('./app/config/server'); // carregando o módulo do servidor
+let rotaHome = require('./app/routes/home')// só está definindo as rotas
+rotaHome(app); // Está executando a função que está dentro do módulo home.js, passando o app como parâmetro
 
-app.set('view engine', 'ejs');
+let rotaAdicionarUsuario = require('./app/routes/adicionar_usuario');
+rotaAdicionarUsuario(app);
 
-app.get('/', function(req, res) {
-    res.render('home/index');
-});
+let rotaCursos = require('./app/routes/cursos');
+rotaCursos(app);    
 
-app.get('/formulario_adicionar_usuario', function(req, res) {
-    res.render('admin/adicionar_usuario');
-});
+let rotaProfessores = require('./app/routes/professores');
+rotaProfessores(app);
 
-app.get('/informacao/historia', function(req, res) {
-    res.render('informacao/historia');
-});
+let rotaHistoria = require('./app/routes/historia');
+rotaHistoria(app);
 
-app.get('/informacao/cursos', function(req, res) {
-    res.render('informacao/cursos');
-});
-
-app.get('/informacao/professores', function(req, res) {
-    res.render('informacao/professores');
-});
 
 app.listen(3000, function() {
-    console.log('Servidor rodando na porta 3000');
+    console.log('Servidor iniciado na porta 3000');
 });
