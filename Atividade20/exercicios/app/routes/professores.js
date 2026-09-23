@@ -1,4 +1,4 @@
-const dbConnection = require('../config/dbConnection');
+// const dbConnection = require('../config/dbConnection');
 
 module.exports = function(app) {
     // REMOVIDO DE FATO (mantido como referência):
@@ -7,6 +7,9 @@ module.exports = function(app) {
     //     const sql = require('mssql/msnodesqlv8');
     //     async function getProfessores() {
     //         try {
+                // let connection = app.config.dbConnection; 
+                 // const pool = await connection; 
+
     //             const pool = await sql.connect(sqlConfig);
     //             const results = await pool.request().query('SELECT * from PROFESSORES');
     //             res.render('informacao/professores', { profs: results.recordset });
@@ -27,6 +30,8 @@ module.exports = function(app) {
 
         try {
             const sql = await dbConnection();
+            let connection = app.config.dbConnection; 
+            const pool = await connection; 
 
             if (!sql) {
                 return res.render('informacao/professores', { profs: fallbackProfessores });
