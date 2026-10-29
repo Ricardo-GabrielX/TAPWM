@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Professores - Fatec Sorocaba</title>
+    <style>
+        table { border-collapse: collapse; }
+        th, td { border: 1px solid black; padding: 5px; }
+        th { background: #eee; }
+        td { background: #ffc; }
+    </style>
+</head>
+<body>
+    <h1>Lista de Professores</h1>
+    <p><a href="/admin/adicionar_professor">Adicionar professor</a></p>
+    <table id="tabela1">
+        <thead><tr><th>Nome</th><th>E-mail</th><th>Operações</th></tr></thead>
+        <tbody>
+            <% if (!profs.length) { %><tr><td colspan="3">Nenhum professor cadastrado.</td></tr><% } %>
+            <% for (const professor of profs) { %>
+                <tr>
+                    <td><%= professor.NOME_PROFESSOR %></td>
+                    <td><%= professor.EMAIL_PROFESSOR %></td>
+                    <td>
+                        <a href="/informacao/professores/detalhaprofessor?id=<%= professor.ID_PROFESSOR %>">Detalhes</a>
+                        <a href="/admin/editar_professor?id=<%= professor.ID_PROFESSOR %>">Editar</a>
+                        <form action="/professor/deletar" method="post">
+                            <input type="hidden" name="id_professor" value="<%= professor.ID_PROFESSOR %>">
+                            <button type="submit">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+    <p><a href="/">Página inicial</a></p>
+</body>
+</html>
