@@ -42,6 +42,7 @@ O repositório abrange desde fundamentos de Programação Orientada a Objetos (P
 - **Atividade17**: Evolução do padrão assíncrono em Node.js com Promises e criação de servidores HTTP nativos utilizando o módulo `http`.
 - **Atividade18**: Introdução ao framework Express.js. Criação de rotas HTTP (método GET), configuração de middlewares e introdução à renderização de templates com a engine EJS.
 - **Atividade19**: Estruturação de aplicação web com Express e EJS. Separação hierárquica de views em subdiretórios (`views/home`, `views/admin`, `views/informacao`), configuração de rotas modularizadas e entrega de páginas dinâmicas renderizadas no servidor.
+- **Atividade21**: Continuação da Atividade20 com consulta de professores no SQL Server e renderização dos registros em EJS. Configuração da conexão por variáveis de ambiente e tratamento de falhas na listagem. Instruções de execução em [Atividade21/README.md](Atividade21/README.md).
 - **Atividade22**: CRUD de professores com Express, EJS e SQL Server. Inclusão de modelos para acesso ao banco, cadastro, listagem, detalhes, edição e exclusão, com validação dos formulários e consultas parametrizadas. Instruções de execução em [Atividade22/README.md](Atividade22/README.md).
 
 ---
